@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const ADD_COMMENT = gql`
+	mutation AddComment($post_id: ID!, $username: String!, $text: String!) {
+		insertComment(post_id: $post_id, text: $text, username: $username) {
+			created_at
+			id
+			post_id
+			text
+			username
+		}
+	}
+`;
+
 export const ADD_POST = gql`
 	mutation AddPost(
 		$body: String!
@@ -27,13 +39,11 @@ export const ADD_POST = gql`
 `;
 
 export const ADD_SUBREDDIT = gql`
-	mutation AddSubreddit(
-		$topic: String!
-	) {
+	mutation AddSubreddit($topic: String!) {
 		insertSubreddit(topic: $topic) {
 			id
 			topic
 			created_at
 		}
 	}
-`
+`;

@@ -127,6 +127,16 @@ type Query {
 			configuration: "postgresql_config"
 		)
 
+	getPostListByPostId(post_id: ID!): Post
+		@dbquery(
+			type: "postgresql"
+			query: """
+				select * from "post"
+				where "post"."id" = $1
+			"""
+			configuration: "postgresql_config"
+		)
+
 	getPostListByTopic(topic: String!): [Post]
 		@dbquery(
 			type: "postgresql"
@@ -189,8 +199,16 @@ type Mutation {
 			dml: INSERT
 			configuration: "postgresql_config"
 		)
+
+	insertComment(post_id: ID!, username: String!, text: String!): Comment
+		@dbquery(
+			type: "postgresql"
+			table: "comment"
+			dml: INSERT
+			configuration: "postgresql_config"
+		)
 	"""
-	In this mutation example you can see how to do a mutation to delete data from the database.
+	In this mutation example you can see how to do a mutation to kdelete data from the database.
 	"""
 	deletePost(
 		image: String!

@@ -16,17 +16,24 @@ import {
 	MenuIcon,
 } from "@heroicons/react/solid";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 function Header() {
 	const { data: session } = useSession();
 	return (
 		<div className="sticky top-0 z-50 flex w-full px-4 py-2 bg-white shadow-md">
-			<div className={`relative flex-shrink-0 w-20 h-10 text-center cursor-pointer ${session ? "mt-1" : "mt-0"}`}>
-				<Image
-					src="https://links.papareact.com/fqy"
-					layout="fill"
-					objectFit="contain"
-				/>
+			<div
+				className={`relative flex-shrink-0 w-20 h-10 text-center cursor-pointer ${
+					session ? "mt-1" : "mt-0"
+				}`}
+			>
+				<Link href="/">
+					<Image
+						src="https://links.papareact.com/fqy"
+						layout="fill"
+						objectFit="contain"
+					/>
+				</Link>
 			</div>
 
 			<div className="lg:flex items-center mx-7 xl:min-w-[300px] hidden">
@@ -94,8 +101,7 @@ function Header() {
 
 					<p className="truncate">Sign In</p>
 				</div>
-			)}	
-			
+			)}
 		</div>
 	);
 }
