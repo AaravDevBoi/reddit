@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import TimeAgo from "react-timeago";
+import Avatar from "../../components/Avatar";
 import Post from "../../components/Post";
 import { ADD_COMMENT } from "../../graphql/mutations";
 import { GET_POST_BY_POST_ID } from "../../graphql/queries";
@@ -88,7 +90,35 @@ function PostPage() {
 						Comment
 					</button>
 				</form>
+
 			</div>
+			<div className="px-10 py-5 -my-5 bg-white border border-t-0 border-gray-300 rounded-b-md">
+					<hr className="py-2" />
+
+					{post?.comments?.map((comment) => (
+						<div
+							key={comment.id}
+							className="relative flex items-center space-x-2 space-y-5"
+						>
+							<hr className="absolute z-0 h-20 border left-7 top-12" />
+
+							<div className="z-50">
+								<Avatar seed={comment.username} />
+							</div>
+
+							<div className="flex flex-col p-2">
+								<p className="py-2 text-xs text-gray-400">
+									<span className="font-semibold text-gray-600">
+										{comment.username}
+									</span>{" "}
+									• Posted at{" "}
+									<TimeAgo date={comment.created_at} />
+								</p>
+								<p>{comment.text}</p>
+							</div>
+						</div>
+					))}
+				</div>
 		</div>
 	);
 }

@@ -200,6 +200,14 @@ type Mutation {
 			configuration: "postgresql_config"
 		)
 
+	insertVote(post_id: ID!, username: String!, upvote: Boolean!) : Vote
+	    @dbquery (
+			type: "postgresql"
+			table: "vote"
+			dml: INSERT
+			configuration: "postgresql_config"
+		)
+
 	insertComment(post_id: ID!, username: String!, text: String!): Comment
 		@dbquery(
 			type: "postgresql"
